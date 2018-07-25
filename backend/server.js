@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import {getConfig} from "./config";
-import Message from './models/message'
+import routes from './routes'
 
 const app = express();
 const router = express.Router();
@@ -23,14 +23,9 @@ app.use(function(req, res, next) {
     next();
 });
 
-router.get('/', (req, res) => {
-    //res.json({ message: 'Jello, World!' });
-    Message.find((err, message) => {
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true, message: message });
-    })
-});
 
-app.use('/api', router);
+
+app.use('/api',routes);
+
 
 app.listen(API_PORT, () => console.log(`Navi listens on ${API_PORT}`));
