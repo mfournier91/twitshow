@@ -1,4 +1,3 @@
-import Message from '../models/message'
 import tweetRoutes from './tweets'
 import userRoutes from './users'
 const router = require('express').Router()

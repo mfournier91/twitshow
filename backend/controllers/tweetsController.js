@@ -1,11 +1,10 @@
-import Message from '../models/message'
+import Tweet from '../models/tweet'
 
 module.exports = {
-    getJelloWorld: (req, res) => {
-        //res.json({ message: 'Jello, World!' });
-        Message.find((err, message) => {
-            if (err) return res.json({ success: false, error: err });
-            return res.json({ success: true, message: message });
+    getTweets: (req, res) => {
+        Tweet.find((err, tweets) => {
+            if (err) return res.json({ error: err });
+            return res.json(tweets);
         })
     }
 }
