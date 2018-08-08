@@ -1,5 +1,6 @@
 const React = require('react')
 const {getConfig} = require('../../../backend/config')
+import {connect} from 'react-redux'
 class App extends React.Component {
     state = {
         message: null
@@ -8,6 +9,7 @@ class App extends React.Component {
     api = getConfig("backendUri")+"api"
 
     componentDidMount() {
+        console.log(this.props)
 
         const urls = [`${this.api}/users`,`${this.api}/tweets`]
 
@@ -32,4 +34,8 @@ class App extends React.Component {
     }
 }
 
-export default App
+export default connect((state) => ({
+    authedUser: state.authedUser,
+    users: state.users,
+    tweets: state.tweets
+}))(App)
