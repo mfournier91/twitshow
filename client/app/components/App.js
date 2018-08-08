@@ -1,6 +1,7 @@
 const React = require('react')
 const {getConfig} = require('../../../backend/config')
 import {connect} from 'react-redux'
+import {handleInitialData} from '../actions/shared'
 class App extends React.Component {
     state = {
         message: null
@@ -10,16 +11,19 @@ class App extends React.Component {
 
     componentDidMount() {
         console.log(this.props)
+        const {dispatch} = this.props
 
-        const urls = [`${this.api}/users`,`${this.api}/tweets`]
+        dispatch(handleInitialData())
 
-        var promises = urls.map(url => fetch(url).then(data => data.json()));
-        Promise.all(promises).then(([users, tweets]) => {
-            // do something with results.
-            this.setState({
-                message: `${users[0].name}: ${tweets[0].text}`
-            })
-        });
+        // const urls = [`${this.api}/users`,`${this.api}/tweets`]
+        //
+        // var promises = urls.map(url => fetch(url).then(data => data.json()));
+        // Promise.all(promises).then(([users, tweets]) => {
+        //     // do something with results.
+        //     this.setState({
+        //         message: `${users[0].name}: ${tweets[0].text}`
+        //     })
+        // });
 
 
     }
