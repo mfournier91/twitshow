@@ -1,7 +1,7 @@
 import mongoose, {Schema} from 'mongoose'
 
 const tweetSchema = new Schema({
-    _id: String,
+    
     text: { type: String, required: true },
     author: { type: Schema.Types.ObjectId, ref: 'User' },
     timestamp: {type: Number, default: Date.now()},
