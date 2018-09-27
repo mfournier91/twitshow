@@ -1,5 +1,9 @@
+import requests from '../requests/index'
+
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
+
+const {putToggleLikeTweet} = requests
 
 export function receiveTweets(tweets) {
     return {
@@ -14,5 +18,15 @@ export function toggleTweet(tweetId, hasLiked, authedUser) {
     tweetId,
     hasLiked,
     authedUser
+  }
+}
+
+export function handleToggleTweet(tweetId, hasLiked, authedUser){
+  return (dispatch) => {
+    dispatch(toggleTweet(tweetId, hasLiked, authedUser))
+    putToggleLikeTweet(tweetId, authedUser).then((response) => console.log(response))
+      .catch((err) => {
+        dispatch(toggleTweet(tweetId, !hasLiked, authedUser))
+      })
   }
 }
